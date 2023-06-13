@@ -26,6 +26,7 @@ Additionally, it also supports CRUD operations for `Product` and `DiscountPolicy
 - Code formatting according to [Google Style Guide](https://google.github.io/styleguide/javaguide.html)
 - [OpenAPI](https://swagger.io/specification/) and [SwaggerUI](https://swagger.io/tools/swagger-ui/) generation
 - Code coverage report generation
+- Performance optimized database queries through indexing
 - Auditable database documents (createdBy, createdAt, lastModifiedBy, lastModifiedAt)
 
 ## Run application and external dependencies
