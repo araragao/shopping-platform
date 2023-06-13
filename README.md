@@ -1,8 +1,8 @@
 # Shopping platform
 
 ## Description
-*This application aims to provide a REST API that allows users to get price quotations based on 
-order's amount and related product.*
+**This application aims to provide a REST API that allows users to get price quotations based on 
+order's amount and related product.**
 
 It supports the calculation of the order's price based on 3 different criteria:
 - standard order price
@@ -16,11 +16,11 @@ Additionally, it also supports CRUD operations for `Product` and `DiscountPolicy
 - Docker Engine 19.03.0+
 
 ## Technologies
-- 🫀 *Language*: [Java](https://docs.oracle.com/en/java/javase/17/)
-- 🚀 *Framework*: [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
-- 🗄️ *Database*: [MongoDB](https://www.mongodb.com/docs/)
-- 🏗️ *Build*: [Maven](https://maven.apache.org/guides/)
-- 📦 *Containerization*: [Docker](https://docs.docker.com/)
+- 🫀 **Language**: [Java](https://docs.oracle.com/en/java/javase/17/)
+- 🚀 **Framework**: [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
+- 🗄️ **Database**: [MongoDB](https://www.mongodb.com/docs/)
+- 🏗️ **Build**: [Maven](https://maven.apache.org/guides/)
+- 📦 **Containerization**: [Docker](https://docs.docker.com/)
 
 ## Features
 - Code formatting according to [Google Style Guide](https://google.github.io/styleguide/javaguide.html)
