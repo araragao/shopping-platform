@@ -29,13 +29,16 @@ Additionally, it also supports CRUD operations for `Product` and `DiscountPolicy
 - Performance optimized database queries through indexing
 - Auditable database documents (createdBy, createdAt, lastModifiedBy, lastModifiedAt)
 
-## Run application and external dependencies
+## Run application
+
+- OpenAPI: [http://localhost:8080/api-docs](http://localhost:8080/api-docs)
+- SwaggerUI: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
+### Run application and external dependencies
 Docker Compose is used to achieve this purpose.
 The application is containerized according to the respective Dockerfile and started alongside a MongoDB instance.
 
 `docker compose up`
-
-## Run application
 
 ### Build
 `docker build -t shopping-platform-app .`
