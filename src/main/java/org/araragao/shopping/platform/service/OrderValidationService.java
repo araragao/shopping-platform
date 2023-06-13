@@ -37,6 +37,6 @@ public class OrderValidationService {
   }
 
   private boolean isOrderAmountHigherThanProductStock(BigInteger amount, BigInteger stock) {
-    return amount.compareTo(stock) >= 0;
+    return amount.compareTo(stock) > 0;
   }
 }
