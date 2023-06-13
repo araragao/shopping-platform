@@ -1,5 +1,6 @@
 package org.araragao.shopping.platform.service;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.math.BigDecimal;
@@ -14,7 +15,15 @@ class OrderValidationServiceTest {
   OrderValidationService orderValidationService = new OrderValidationService();
 
   @Test
-  void testValidate_ProductOutOfStock_ThrowsException() {
+  void testValidate() {
+    BigInteger amount = BigInteger.ONE;
+    Product product = DataUtils.getMockProduct(BigDecimal.ONE, BigInteger.ONE);
+
+    assertDoesNotThrow(() -> orderValidationService.validate(amount, product));
+  }
+
+  @Test
+  void testValidateProductOutOfStockThrowsException() {
     BigInteger amount = BigInteger.ONE;
     Product product = DataUtils.getMockProduct(BigDecimal.ONE, BigInteger.ZERO);
 
@@ -23,7 +32,7 @@ class OrderValidationServiceTest {
   }
 
   @Test
-  void testValidate_OrderAmountHigherThanProductStock_ThrowsException() {
+  void testValidateOrderAmountHigherThanProductStockThrowsException() {
     BigInteger amount = BigInteger.TEN;
     Product product = DataUtils.getMockProduct(BigDecimal.ONE, BigInteger.ONE);
 
