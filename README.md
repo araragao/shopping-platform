@@ -4,10 +4,10 @@
 **This application aims to provide a REST API that allows users to get price quotations based on 
 order's amount and related product.**
 
-It supports the calculation of the order's price based on 3 different criteria:
-- standard order price
-- discounted order price (for a specific discount policy)
-- best order price
+It supports the calculation of the order's price based on 3 different methods:
+- (standard) order price
+- discounted order price
+- best discounted order price
 
 Additionally, it also supports CRUD operations for `Product` and `DiscountPolicy` entities.
 
