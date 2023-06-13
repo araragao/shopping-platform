@@ -10,6 +10,14 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class OrderValidationService {
 
+  /**
+   Validates the order by checking the order's amount and stock availability of the product.
+   If the product is out of stock or the order amount exceeds the product stock,
+   an exception is thrown.
+   @param amount the amount of the product to be ordered (as a BigInteger)
+   @param product the product to be validated
+   @throws OrderValidationException if the product is out of stock or the order amount exceeds the product stock
+   */
   public void validate(BigInteger amount, Product product) {
     if (isProductOutOfStock(product.getStock())) {
       log.warn("Order Validation :: ProductId: {} is out of stock", product.getId());
