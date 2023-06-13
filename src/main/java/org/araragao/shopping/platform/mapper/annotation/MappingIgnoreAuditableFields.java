@@ -12,6 +12,4 @@ import org.mapstruct.Mapping;
 @Mapping(target = "createdAt", ignore = true)
 @Mapping(target = "lastModifiedBy", ignore = true)
 @Mapping(target = "lastModifiedAt", ignore = true)
-public @interface MappingIgnoreAuditableFields {
-
-}
+public @interface MappingIgnoreAuditableFields {}

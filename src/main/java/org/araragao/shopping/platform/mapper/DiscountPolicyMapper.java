@@ -6,7 +6,6 @@ import org.araragao.shopping.platform.dao.database.document.DiscountPolicyDocume
 import org.araragao.shopping.platform.mapper.annotation.MappingIgnoreAuditableFields;
 import org.araragao.shopping.platform.model.DiscountPolicy;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
