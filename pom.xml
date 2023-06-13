@@ -10,10 +10,19 @@
 	</parent>
 
 	<groupId>org.araragao</groupId>
-	<artifactId>shopping.platform</artifactId>
+	<artifactId>shopping-platform</artifactId>
 	<version>1.0.0</version>
 	<name>shopping-platform</name>
 	<description>Shopping platform demo API</description>
+
+	<developers>
+		<developer>
+			<id>araragao</id>
+			<name>André Aragão</name>
+			<email>business@andreribeiroaragao.com</email>
+			<url>https://github.com/araragao</url>
+		</developer>
+	</developers>
 
 	<licenses>
 		<license>
