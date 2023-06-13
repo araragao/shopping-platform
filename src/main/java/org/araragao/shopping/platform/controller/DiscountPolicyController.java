@@ -23,7 +23,7 @@ public class DiscountPolicyController implements DiscountPolicyApi {
   @Override
   public DiscountPolicyDto getDiscountPolicyById(String id) {
     log.info("getDiscountPolicy with discountPolicyId: {}", id);
-    return discountPolicyMapper.toDto(discountPolicyService.getDiscountPolicy(id));
+    return discountPolicyMapper.toDto(discountPolicyService.getDiscountPolicyById(id));
   }
 
   @Override

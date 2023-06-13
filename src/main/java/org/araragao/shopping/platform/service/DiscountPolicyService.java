@@ -16,7 +16,7 @@ public class DiscountPolicyService {
 
   private final DiscountPolicyDao discountPolicyDao;
 
-  public DiscountPolicy getDiscountPolicy(String id) {
+  public DiscountPolicy getDiscountPolicyById(String id) {
     return discountPolicyDao.find(id);
   }
 

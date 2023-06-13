@@ -14,27 +14,26 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class OrderService {
 
-  private final ProductService productService;
   private final DiscountPolicyService discountPolicyService;
-  private final OrderValidationService orderValidationService;
-
 
   /**
-   Calculates the order price based on the given amount and price.
-   @param amount the amount of the product to be ordered (as a BigInteger)
-   @param price the price of the product (as a BigDecimal)
-   @return the calculated order price (as a BigDecimal)
+   * Calculates the order price based on the given amount and price.
+   *
+   * @param amount the amount of the product to be ordered (as a BigInteger)
+   * @param price the price of the product (as a BigDecimal)
+   * @return the calculated order price (as a BigDecimal)
    */
   public BigDecimal getOrderPrice(BigInteger amount, BigDecimal price) {
     return calculatePrice(amount, price);
   }
 
   /**
-   Calculates the discounted order price based on the given amount, product, and discount policy.
-   @param amount the amount of the product to be ordered (as a BigInteger)
-   @param product the product for which the order is being placed
-   @param discountPolicy the discount policy to be applied
-   @return the calculated discounted order price (as a BigDecimal)
+   * Calculates the discounted order price based on the given amount, product, and discount policy.
+   *
+   * @param amount the amount of the product to be ordered (as a BigInteger)
+   * @param product the product for which the order is being placed
+   * @param discountPolicy the discount policy to be applied
+   * @return the calculated discounted order price (as a BigDecimal)
    */
   public BigDecimal getDiscountedOrderPrice(
       BigInteger amount, Product product, DiscountPolicy discountPolicy) {
@@ -46,25 +45,24 @@ public class OrderService {
   }
 
   /**
-   Calculates the best discounted order price, i.e. lowest, for the given amount and product.
-   The best discounted price, in this case, refers to the lowest price achieved by applying
-   active discount policies to the product.
-   @param amount the amount of the product to be ordered (as a BigInteger)
-   @param productId the ID of the product for which the order is being placed
-   @return the best discounted order price (as a BigDecimal)
+   * Calculates the best discounted order price, i.e. lowest, for the given amount and product. The
+   * best discounted price, in this case, refers to the lowest price achieved by applying active
+   * discount policies to the product.
+   *
+   * @param amount the amount of the product to be ordered (as a BigInteger)
+   * @param product the product for which the order is being placed
+   * @return the best discounted order price (as a BigDecimal)
    */
-  public BigDecimal getBestDiscountedOrderPrice(BigInteger amount, String productId) {
-    log.info("getMinOrderPrice for productId: {} with amount: {}", productId, amount);
-
-    Product product = productService.getProductById(productId);
-
-    orderValidationService.validate(amount, product);
+  public BigDecimal getBestDiscountedOrderPrice(BigInteger amount, Product product) {
+    log.info("getBestDiscountedOrderPrice for product: {} with amount: {}", product, amount);
 
     List<DiscountPolicy> discountPolicies =
-        discountPolicyService.getActiveDiscountPoliciesByProductId(productId);
+        discountPolicyService.getActiveDiscountPoliciesByProductId(product.getId());
 
     log.info(
-        "Found {} active discount policies for productId: {}", discountPolicies.size(), productId);
+        "Found {} active discount policies for productId: {}",
+        discountPolicies.size(),
+        product.getId());
 
     return discountPolicies.parallelStream()
         .map(discountPolicy -> getDiscountedOrderPrice(amount, product, discountPolicy))

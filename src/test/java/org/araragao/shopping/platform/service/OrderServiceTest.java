@@ -1,8 +1,6 @@
 package org.araragao.shopping.platform.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -21,9 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class OrderServiceTest {
 
-  @Mock ProductService productService;
   @Mock DiscountPolicyService discountPolicyService;
-  @Mock OrderValidationService orderValidationService;
   @InjectMocks OrderService orderService;
 
   @Test
@@ -73,20 +69,16 @@ class OrderServiceTest {
   @Test
   public void testGetBestDiscountedOrderPrice() {
     BigInteger amount = BigInteger.valueOf(100);
-    String productId = DataUtils.getRandomMongoId();
     Product product = DataUtils.getMockProduct(BigDecimal.valueOf(200), BigInteger.valueOf(100));
     List<DiscountPolicy> discountPolicies =
         Arrays.asList(
             DataUtils.getMockCountDiscountPolicy(BigDecimal.valueOf(50), BigInteger.valueOf(100)),
             DataUtils.getMockPercentageDiscountPolicy(BigDecimal.valueOf(0.2)));
 
-    doNothing().when(orderValidationService).validate(any(), any());
-    when(productService.getProductById(productId)).thenReturn(product);
-    when(discountPolicyService.getActiveDiscountPoliciesByProductId(productId))
+    when(discountPolicyService.getActiveDiscountPoliciesByProductId(product.getId()))
         .thenReturn(discountPolicies);
 
-    BigDecimal bestDiscountedOrderPrice =
-        orderService.getBestDiscountedOrderPrice(amount, productId);
+    BigDecimal bestDiscountedOrderPrice = orderService.getBestDiscountedOrderPrice(amount, product);
 
     assertEquals(BigDecimal.valueOf(10000), bestDiscountedOrderPrice);
   }
@@ -94,17 +86,13 @@ class OrderServiceTest {
   @Test
   public void testGetBestDiscountedOrderPriceWithNoDiscountPolicies() {
     BigInteger amount = BigInteger.valueOf(100);
-    String productId = DataUtils.getRandomMongoId();
     Product product = DataUtils.getMockProduct(BigDecimal.valueOf(200), BigInteger.valueOf(100));
     List<DiscountPolicy> discountPolicies = List.of();
 
-    doNothing().when(orderValidationService).validate(any(), any());
-    when(productService.getProductById(productId)).thenReturn(product);
-    when(discountPolicyService.getActiveDiscountPoliciesByProductId(productId))
+    when(discountPolicyService.getActiveDiscountPoliciesByProductId(product.getId()))
         .thenReturn(discountPolicies);
 
-    BigDecimal bestDiscountedOrderPrice =
-        orderService.getBestDiscountedOrderPrice(amount, productId);
+    BigDecimal bestDiscountedOrderPrice = orderService.getBestDiscountedOrderPrice(amount, product);
 
     assertEquals(BigDecimal.valueOf(20000), bestDiscountedOrderPrice);
   }
