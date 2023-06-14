@@ -6,7 +6,7 @@ import org.araragao.shopping.platform.dao.database.repository.DiscountPolicyRepo
 import org.araragao.shopping.platform.exception.custom.DiscountPolicyNotFoundException;
 import org.araragao.shopping.platform.mapper.DiscountPolicyMapper;
 import org.araragao.shopping.platform.model.DiscountPolicy;
-import org.springframework.data.domain.Page;
+import org.araragao.shopping.platform.model.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 

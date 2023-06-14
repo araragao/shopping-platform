@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.araragao.shopping.platform.dao.DiscountPolicyDao;
 import org.araragao.shopping.platform.model.DiscountPolicy;
-import org.springframework.data.domain.Page;
+import org.araragao.shopping.platform.model.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 

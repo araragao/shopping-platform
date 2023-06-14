@@ -6,8 +6,8 @@ import org.araragao.shopping.platform.config.MapStructConfig;
 import org.araragao.shopping.platform.dao.database.document.DiscountPolicyDocument;
 import org.araragao.shopping.platform.mapper.annotation.MappingIgnoreAuditableFields;
 import org.araragao.shopping.platform.model.DiscountPolicy;
+import org.araragao.shopping.platform.model.Page;
 import org.mapstruct.Mapper;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
 @Mapper(config = MapStructConfig.class)
@@ -17,13 +17,7 @@ public interface DiscountPolicyMapper {
 
   List<DiscountPolicyDto> toDtos(List<DiscountPolicy> discountPolicy);
 
-  default Page<DiscountPolicyDto> toDtoPage(Page<DiscountPolicy> discountPolicyPage) {
-    List<DiscountPolicyDto> discountPolicyDtos = toDtos(discountPolicyPage.getContent());
-    return new PageImpl<>(
-        discountPolicyDtos,
-        discountPolicyPage.getPageable(),
-        discountPolicyPage.getTotalElements());
-  }
+  Page<DiscountPolicyDto> toDtoPage(Page<DiscountPolicy> productPage);
 
   DiscountPolicy toModel(DiscountPolicyDto discountPolicyDto);
 
@@ -31,10 +25,14 @@ public interface DiscountPolicyMapper {
 
   List<DiscountPolicy> toModels(List<DiscountPolicyDocument> discountPolicyDocuments);
 
-  default Page<DiscountPolicy> toModelPage(Page<DiscountPolicyDocument> discountPolicyPage) {
-    List<DiscountPolicy> discountPolicies = toModels(discountPolicyPage.getContent());
-    return new PageImpl<>(
-        discountPolicies, discountPolicyPage.getPageable(), discountPolicyPage.getTotalElements());
+  default Page<DiscountPolicy> toModelPage(
+      org.springframework.data.domain.Page<DiscountPolicyDocument> discountPolicyDocumentPage) {
+    List<DiscountPolicy> products = toModels(discountPolicyDocumentPage.getContent());
+    return new Page<>(
+        new PageImpl<>(
+            products,
+            discountPolicyDocumentPage.getPageable(),
+            discountPolicyDocumentPage.getTotalElements()));
   }
 
   @MappingIgnoreAuditableFields
