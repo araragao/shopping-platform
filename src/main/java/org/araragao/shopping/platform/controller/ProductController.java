@@ -8,7 +8,6 @@ import org.araragao.shopping.platform.mapper.ProductMapper;
 import org.araragao.shopping.platform.model.Page;
 import org.araragao.shopping.platform.service.ProductService;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -32,13 +31,13 @@ public class ProductController implements ProductApi {
   }
 
   @Override
-  public ProductDto createProduct(@RequestBody ProductDto productDto) {
+  public ProductDto createProduct(ProductDto productDto) {
     log.info("createProduct with productDto: {}", productDto);
     return productMapper.toDto(productService.createProduct(productMapper.toModel(productDto)));
   }
 
   @Override
-  public ProductDto updateProduct(@RequestBody ProductDto productDto) {
+  public ProductDto updateProduct(ProductDto productDto) {
     log.info("updateProduct with productDto: {}", productDto);
     return productMapper.toDto(productService.updateProduct(productMapper.toModel(productDto)));
   }

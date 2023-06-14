@@ -23,9 +23,19 @@ Additionally, it also supports CRUD operations for `Product` and `DiscountPolicy
 - 📦 **Containerization**: [Docker](https://docs.docker.com/)
 
 ## Features
-- Code formatting according to [Google Style Guide](https://google.github.io/styleguide/javaguide.html)
+
+### API
 - [OpenAPI](https://swagger.io/specification/) and [SwaggerUI](https://swagger.io/tools/swagger-ui/) generation
-- Code coverage report generation
+- Request data validation using Javax validation
+
+### Code
+- Code formatting according to [Google Style Guide](https://google.github.io/styleguide/javaguide.html)
+- Code coverage report generation using [JaCoCo](https://www.eclemma.org/jacoco/index.html)
+- Reduced boilerplate using [Lombok](https://projectlombok.org/features/)
+- Mappings generation using [MapStruct](https://mapstruct.org/)
+
+### Database
+- Database migration using [Liquibase](https://www.liquibase.org/get-started/quickstart)
 - Performance optimized database queries through indexing
 - Auditable database documents (createdBy, createdAt, lastModifiedBy, lastModifiedAt)
 

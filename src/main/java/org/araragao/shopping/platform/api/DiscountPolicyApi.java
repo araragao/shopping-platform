@@ -3,10 +3,10 @@ package org.araragao.shopping.platform.api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import java.util.List;
 import org.araragao.shopping.platform.api.dto.DiscountPolicyDto;
 import org.araragao.shopping.platform.api.dto.list.ListDiscountPolicyDto;
@@ -14,14 +14,18 @@ import org.araragao.shopping.platform.api.dto.page.PageDiscountPolicyDto;
 import org.araragao.shopping.platform.model.Page;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Tag(name = "Discount Policies", description = "CRUD operations related to Discount Policies")
+@Validated
 @RequestMapping("/api/discount-policies")
+@Tag(name = "Discount Policies", description = "CRUD operations related to Discount Policies")
 public interface DiscountPolicyApi {
 
   @GetMapping("/{id}")
@@ -45,7 +49,7 @@ public interface DiscountPolicyApi {
             description = "Internal server error",
             content = @Content(mediaType = "application/json"))
       })
-  DiscountPolicyDto getDiscountPolicyById(String id);
+  DiscountPolicyDto getDiscountPolicyById(@PathVariable String id);
 
   @GetMapping
   @Operation(
@@ -95,7 +99,7 @@ public interface DiscountPolicyApi {
             description = "Internal server error",
             content = @Content(mediaType = "application/json"))
       })
-  List<DiscountPolicyDto> getDiscountPoliciesByProductId(String productId);
+  List<DiscountPolicyDto> getDiscountPoliciesByProductId(@PathVariable String productId);
 
   @GetMapping("/{productId}/active")
   @Operation(
@@ -120,10 +124,9 @@ public interface DiscountPolicyApi {
             description = "Internal server error",
             content = @Content(mediaType = "application/json"))
       })
-  List<DiscountPolicyDto> getActiveDiscountPoliciesByProductId(String productId);
+  List<DiscountPolicyDto> getActiveDiscountPoliciesByProductId(@PathVariable String productId);
 
   @PostMapping
-  @RequestBody
   @Operation(summary = "Create a DiscountPolicy", description = "Create a `DiscountPolicy`.")
   @ApiResponses(
       value = {
@@ -144,10 +147,9 @@ public interface DiscountPolicyApi {
             description = "Internal server error",
             content = @Content(mediaType = "application/json"))
       })
-  DiscountPolicyDto createDiscountPolicy(DiscountPolicyDto discountPolicyDto);
+  DiscountPolicyDto createDiscountPolicy(@RequestBody @Valid DiscountPolicyDto discountPolicyDto);
 
   @PutMapping
-  @RequestBody
   @Operation(summary = "Update a DiscountPolicy", description = "Update a `DiscountPolicy`.")
   @ApiResponses(
       value = {
@@ -172,7 +174,7 @@ public interface DiscountPolicyApi {
             description = "Internal server error",
             content = @Content(mediaType = "application/json"))
       })
-  DiscountPolicyDto updateDiscountPolicy(DiscountPolicyDto discountPolicy);
+  DiscountPolicyDto updateDiscountPolicy(@RequestBody @Valid DiscountPolicyDto discountPolicy);
 
   @DeleteMapping("/{id}")
   @Operation(
@@ -180,7 +182,7 @@ public interface DiscountPolicyApi {
       description = "Delete a `DiscountPolicy` by ID.")
   @ApiResponses(
       value = {@ApiResponse(responseCode = "200", description = "Deleted DiscountPolicy")})
-  void deleteDiscountPolicyById(String id);
+  void deleteDiscountPolicyById(@PathVariable String id);
 
   @DeleteMapping("/{productId}")
   @Operation(
@@ -188,5 +190,5 @@ public interface DiscountPolicyApi {
       description = "Delete all `DiscountPolicy` by `Product` ID.")
   @ApiResponses(
       value = {@ApiResponse(responseCode = "200", description = "Deleted DiscountPolicy")})
-  void deleteDiscountPoliciesByProductId(String productId);
+  void deleteDiscountPoliciesByProductId(@PathVariable String productId);
 }

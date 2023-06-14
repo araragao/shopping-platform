@@ -27,7 +27,7 @@ public class DiscountPolicyDaoImpl implements DiscountPolicyDao {
                     new DiscountPolicyNotFoundException(
                         "DiscountPolicy with id: "
                             + discountPolicyId
-                            + "was not found in the database")));
+                            + " was not found in the database")));
   }
 
   @Override

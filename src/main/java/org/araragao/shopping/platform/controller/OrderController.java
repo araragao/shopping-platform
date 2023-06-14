@@ -13,7 +13,6 @@ import org.araragao.shopping.platform.service.DiscountPolicyService;
 import org.araragao.shopping.platform.service.OrderService;
 import org.araragao.shopping.platform.service.OrderValidationService;
 import org.araragao.shopping.platform.service.ProductService;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -27,7 +26,7 @@ public class OrderController implements OrderApi {
   private final DiscountPolicyService discountPolicyService;
 
   @Override
-  public OrderPriceDto getOrderPrice(@RequestBody OrderDto orderDto) {
+  public OrderPriceDto getOrderPrice(OrderDto orderDto) {
     log.info("getOrderPrice with orderDto: {}", orderDto);
 
     Product product = productService.getProductById(orderDto.productId());
@@ -37,8 +36,7 @@ public class OrderController implements OrderApi {
   }
 
   @Override
-  public OrderPriceDto getDiscountedOrderPrice(
-      @RequestBody OrderPriceDiscountedDto orderPriceDiscountedDto) {
+  public OrderPriceDto getDiscountedOrderPrice(OrderPriceDiscountedDto orderPriceDiscountedDto) {
     log.info("getDiscountedOrderPrice with orderDiscountedDto: {}", orderPriceDiscountedDto);
 
     Product product = productService.getProductById(orderPriceDiscountedDto.productId());
@@ -54,7 +52,7 @@ public class OrderController implements OrderApi {
 
   @Override
   public OrderPriceDto getBestDiscountedOrderPrice(
-      @RequestBody OrderPriceDiscountedBestDto orderPriceDiscountedBestDto) {
+      OrderPriceDiscountedBestDto orderPriceDiscountedBestDto) {
     log.info(
         "getBestDiscountedOrderPrice with orderDiscountedBestDto: {}", orderPriceDiscountedBestDto);
 

@@ -24,7 +24,7 @@ public class ProductDaoImpl implements ProductDao {
             .orElseThrow(
                 () ->
                     new ProductNotFoundException(
-                        "Product with id: " + productId + "was not found in the database")));
+                        "Product with id: " + productId + " was not found in the database")));
   }
 
   @Override
