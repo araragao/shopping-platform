@@ -77,7 +77,8 @@ public interface OrderApi {
             description = "Internal server error",
             content = @Content(mediaType = "application/json"))
       })
-  OrderPriceDto getDiscountedOrderPrice(@RequestBody @Valid OrderPriceDiscountedDto orderPriceDiscountedDto);
+  OrderPriceDto getDiscountedOrderPrice(
+      @RequestBody @Valid OrderPriceDiscountedDto orderPriceDiscountedDto);
 
   @PostMapping("/price/discounted/best")
   @Operation(
