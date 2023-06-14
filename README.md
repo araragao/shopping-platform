@@ -26,7 +26,7 @@ Additionally, it also supports CRUD operations for `Product` and `DiscountPolicy
 
 ### API
 - [OpenAPI](https://swagger.io/specification/) and [SwaggerUI](https://swagger.io/tools/swagger-ui/) generation
-- Request data validation using Javax validation
+- Request data validation using Jakarta validation
 
 ### Code
 - Code formatting according to [Google Style Guide](https://google.github.io/styleguide/javaguide.html)
