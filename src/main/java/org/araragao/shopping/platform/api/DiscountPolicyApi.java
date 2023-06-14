@@ -3,10 +3,10 @@ package org.araragao.shopping.platform.api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import java.util.List;
 import org.araragao.shopping.platform.api.dto.DiscountPolicyDto;
 import org.araragao.shopping.platform.api.dto.list.ListDiscountPolicyDto;
@@ -14,14 +14,17 @@ import org.araragao.shopping.platform.api.dto.page.PageDiscountPolicyDto;
 import org.araragao.shopping.platform.model.Page;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Tag(name = "Discount Policies", description = "CRUD operations related to Discount Policies")
+@Validated
 @RequestMapping("/api/discount-policies")
+@Tag(name = "Discount Policies", description = "CRUD operations related to Discount Policies")
 public interface DiscountPolicyApi {
 
   @GetMapping("/{id}")
@@ -123,7 +126,6 @@ public interface DiscountPolicyApi {
   List<DiscountPolicyDto> getActiveDiscountPoliciesByProductId(String productId);
 
   @PostMapping
-  @RequestBody
   @Operation(summary = "Create a DiscountPolicy", description = "Create a `DiscountPolicy`.")
   @ApiResponses(
       value = {
@@ -144,10 +146,9 @@ public interface DiscountPolicyApi {
             description = "Internal server error",
             content = @Content(mediaType = "application/json"))
       })
-  DiscountPolicyDto createDiscountPolicy(DiscountPolicyDto discountPolicyDto);
+  DiscountPolicyDto createDiscountPolicy(@RequestBody @Valid DiscountPolicyDto discountPolicyDto);
 
   @PutMapping
-  @RequestBody
   @Operation(summary = "Update a DiscountPolicy", description = "Update a `DiscountPolicy`.")
   @ApiResponses(
       value = {
@@ -172,7 +173,7 @@ public interface DiscountPolicyApi {
             description = "Internal server error",
             content = @Content(mediaType = "application/json"))
       })
-  DiscountPolicyDto updateDiscountPolicy(DiscountPolicyDto discountPolicy);
+  DiscountPolicyDto updateDiscountPolicy(@RequestBody @Valid DiscountPolicyDto discountPolicy);
 
   @DeleteMapping("/{id}")
   @Operation(

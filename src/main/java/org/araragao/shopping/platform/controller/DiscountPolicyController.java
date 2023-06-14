@@ -9,7 +9,6 @@ import org.araragao.shopping.platform.mapper.DiscountPolicyMapper;
 import org.araragao.shopping.platform.model.Page;
 import org.araragao.shopping.platform.service.DiscountPolicyService;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -46,7 +45,7 @@ public class DiscountPolicyController implements DiscountPolicyApi {
   }
 
   @Override
-  public DiscountPolicyDto createDiscountPolicy(@RequestBody DiscountPolicyDto discountPolicyDto) {
+  public DiscountPolicyDto createDiscountPolicy(DiscountPolicyDto discountPolicyDto) {
     log.info("createDiscountPolicy with discountPolicyDto: {}", discountPolicyDto);
     return discountPolicyMapper.toDto(
         discountPolicyService.createDiscountPolicy(
@@ -54,7 +53,7 @@ public class DiscountPolicyController implements DiscountPolicyApi {
   }
 
   @Override
-  public DiscountPolicyDto updateDiscountPolicy(@RequestBody DiscountPolicyDto discountPolicy) {
+  public DiscountPolicyDto updateDiscountPolicy(DiscountPolicyDto discountPolicy) {
     log.info("updateDiscountPolicy with discountPolicyDto: {}", discountPolicy);
     return discountPolicyMapper.toDto(
         discountPolicyService.updateDiscountPolicy(discountPolicyMapper.toModel(discountPolicy)));
