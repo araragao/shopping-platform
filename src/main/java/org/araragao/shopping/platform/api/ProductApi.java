@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,7 +47,7 @@ public interface ProductApi {
             description = "Internal server error",
             content = @Content(mediaType = "application/json"))
       })
-  ProductDto getProductById(String id);
+  ProductDto getProductById(@PathVariable String id);
 
   @GetMapping
   @Operation(
@@ -126,5 +127,5 @@ public interface ProductApi {
   @DeleteMapping("/{id}")
   @Operation(summary = "Delete a Product by ID", description = "Delete a `Product` by ID.")
   @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Deleted Product")})
-  void deleteProductById(String id);
+  void deleteProductById(@PathVariable String id);
 }
