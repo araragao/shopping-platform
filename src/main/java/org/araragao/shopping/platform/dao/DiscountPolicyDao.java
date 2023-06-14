@@ -2,7 +2,7 @@ package org.araragao.shopping.platform.dao;
 
 import java.util.List;
 import org.araragao.shopping.platform.model.DiscountPolicy;
-import org.springframework.data.domain.Page;
+import org.araragao.shopping.platform.model.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface DiscountPolicyDao {

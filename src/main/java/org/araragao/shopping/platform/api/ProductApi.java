@@ -1,11 +1,16 @@
 package org.araragao.shopping.platform.api;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.araragao.shopping.platform.api.dto.ProductDto;
+import org.araragao.shopping.platform.api.dto.page.PageProductDto;
+import org.araragao.shopping.platform.model.Page;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,25 +24,106 @@ public interface ProductApi {
 
   @GetMapping("/{id}")
   @Operation(summary = "Get a Product by ID", description = "Get a `Product` by ID.")
+  @ApiResponses(
+      value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Product found",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = ProductDto.class))
+            }),
+        @ApiResponse(
+            responseCode = "404",
+            description = "Product not found",
+            content = @Content(mediaType = "application/json")),
+        @ApiResponse(
+            responseCode = "500",
+            description = "Internal server error",
+            content = @Content(mediaType = "application/json"))
+      })
   ProductDto getProductById(String id);
 
   @GetMapping
   @Operation(
       summary = "Get a Page of Product given page, size and sort query parameters",
       description = "Get a `Page` of `Product` given page, size and sort query parameters.")
+  @ApiResponses(
+      value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Page of Product",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = PageProductDto.class))
+            }),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Bad request",
+            content = @Content(mediaType = "application/json")),
+        @ApiResponse(
+            responseCode = "500",
+            description = "Internal server error",
+            content = @Content(mediaType = "application/json"))
+      })
   Page<ProductDto> getProducts(@ParameterObject Pageable pageable);
 
   @PostMapping
   @RequestBody
   @Operation(summary = "Create a Product", description = "Create a `Product`.")
+  @ApiResponses(
+      value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Product created",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = ProductDto.class))
+            }),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Bad request",
+            content = @Content(mediaType = "application/json")),
+        @ApiResponse(
+            responseCode = "500",
+            description = "Internal server error",
+            content = @Content(mediaType = "application/json"))
+      })
   ProductDto createProduct(ProductDto productDto);
 
   @PutMapping
   @RequestBody
   @Operation(summary = "Update a Product", description = "Update a `Product`.")
+  @ApiResponses(
+      value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Product updated",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = ProductDto.class))
+            }),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Bad request",
+            content = @Content(mediaType = "application/json")),
+        @ApiResponse(
+            responseCode = "404",
+            description = "Product not found",
+            content = @Content(mediaType = "application/json")),
+        @ApiResponse(
+            responseCode = "500",
+            description = "Internal server error",
+            content = @Content(mediaType = "application/json"))
+      })
   ProductDto updateProduct(ProductDto productDto);
 
   @DeleteMapping("/{id}")
   @Operation(summary = "Delete a Product by ID", description = "Delete a `Product` by ID.")
+  @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Deleted Product")})
   void deleteProductById(String id);
 }

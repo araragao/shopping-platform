@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.araragao.shopping.platform.dao.database.repository.ProductRepository;
 import org.araragao.shopping.platform.exception.custom.ProductNotFoundException;
 import org.araragao.shopping.platform.mapper.ProductMapper;
+import org.araragao.shopping.platform.model.Page;
 import org.araragao.shopping.platform.model.Product;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 

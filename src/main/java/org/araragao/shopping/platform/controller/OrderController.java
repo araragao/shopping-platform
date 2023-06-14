@@ -3,9 +3,9 @@ package org.araragao.shopping.platform.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.araragao.shopping.platform.api.OrderApi;
-import org.araragao.shopping.platform.api.dto.OrderDiscountedBestDto;
-import org.araragao.shopping.platform.api.dto.OrderDiscountedDto;
 import org.araragao.shopping.platform.api.dto.OrderDto;
+import org.araragao.shopping.platform.api.dto.OrderPriceDiscountedBestDto;
+import org.araragao.shopping.platform.api.dto.OrderPriceDiscountedDto;
 import org.araragao.shopping.platform.api.dto.OrderPriceDto;
 import org.araragao.shopping.platform.model.DiscountPolicy;
 import org.araragao.shopping.platform.model.Product;
@@ -37,28 +37,31 @@ public class OrderController implements OrderApi {
   }
 
   @Override
-  public OrderPriceDto getDiscountedOrderPrice(@RequestBody OrderDiscountedDto orderDiscountedDto) {
-    log.info("getDiscountedOrderPrice with orderDiscountedDto: {}", orderDiscountedDto);
+  public OrderPriceDto getDiscountedOrderPrice(
+      @RequestBody OrderPriceDiscountedDto orderPriceDiscountedDto) {
+    log.info("getDiscountedOrderPrice with orderDiscountedDto: {}", orderPriceDiscountedDto);
 
-    Product product = productService.getProductById(orderDiscountedDto.productId());
-    orderValidationService.validate(orderDiscountedDto.amount(), product);
+    Product product = productService.getProductById(orderPriceDiscountedDto.productId());
+    orderValidationService.validate(orderPriceDiscountedDto.amount(), product);
 
     DiscountPolicy discountPolicy =
-        discountPolicyService.getDiscountPolicyById(orderDiscountedDto.discountPolicyId());
+        discountPolicyService.getDiscountPolicyById(orderPriceDiscountedDto.discountPolicyId());
 
     return new OrderPriceDto(
-        orderService.getDiscountedOrderPrice(orderDiscountedDto.amount(), product, discountPolicy));
+        orderService.getDiscountedOrderPrice(
+            orderPriceDiscountedDto.amount(), product, discountPolicy));
   }
 
   @Override
   public OrderPriceDto getBestDiscountedOrderPrice(
-      @RequestBody OrderDiscountedBestDto orderDiscountedBestDto) {
-    log.info("getBestDiscountedOrderPrice with orderDiscountedBestDto: {}", orderDiscountedBestDto);
+      @RequestBody OrderPriceDiscountedBestDto orderPriceDiscountedBestDto) {
+    log.info(
+        "getBestDiscountedOrderPrice with orderDiscountedBestDto: {}", orderPriceDiscountedBestDto);
 
-    Product product = productService.getProductById(orderDiscountedBestDto.productId());
-    orderValidationService.validate(orderDiscountedBestDto.amount(), product);
+    Product product = productService.getProductById(orderPriceDiscountedBestDto.productId());
+    orderValidationService.validate(orderPriceDiscountedBestDto.amount(), product);
 
     return new OrderPriceDto(
-        orderService.getBestDiscountedOrderPrice(orderDiscountedBestDto.amount(), product));
+        orderService.getBestDiscountedOrderPrice(orderPriceDiscountedBestDto.amount(), product));
   }
 }

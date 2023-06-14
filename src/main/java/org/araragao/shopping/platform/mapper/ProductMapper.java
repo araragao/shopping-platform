@@ -5,9 +5,9 @@ import org.araragao.shopping.platform.api.dto.ProductDto;
 import org.araragao.shopping.platform.config.MapStructConfig;
 import org.araragao.shopping.platform.dao.database.document.ProductDocument;
 import org.araragao.shopping.platform.mapper.annotation.MappingIgnoreAuditableFields;
+import org.araragao.shopping.platform.model.Page;
 import org.araragao.shopping.platform.model.Product;
 import org.mapstruct.Mapper;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
 @Mapper(config = MapStructConfig.class)
@@ -17,10 +17,7 @@ public interface ProductMapper {
 
   List<ProductDto> toDtos(List<Product> product);
 
-  default Page<ProductDto> toDtoPage(Page<Product> productPage) {
-    List<ProductDto> productDtos = toDtos(productPage.getContent());
-    return new PageImpl<>(productDtos, productPage.getPageable(), productPage.getTotalElements());
-  }
+  Page<ProductDto> toDtoPage(Page<Product> productPage);
 
   Product toModel(ProductDto productDto);
 
@@ -28,10 +25,12 @@ public interface ProductMapper {
 
   List<Product> toModels(List<ProductDocument> productDocuments);
 
-  default Page<Product> toModelPage(Page<ProductDocument> productDocumentPage) {
+  default Page<Product> toModelPage(
+      org.springframework.data.domain.Page<ProductDocument> productDocumentPage) {
     List<Product> products = toModels(productDocumentPage.getContent());
-    return new PageImpl<>(
-        products, productDocumentPage.getPageable(), productDocumentPage.getTotalElements());
+    return new Page<>(
+        new PageImpl<>(
+            products, productDocumentPage.getPageable(), productDocumentPage.getTotalElements()));
   }
 
   @MappingIgnoreAuditableFields
