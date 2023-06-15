@@ -33,8 +33,7 @@
 
 	<properties>
 		<java.version>17</java.version>
-		<liquidbase-core.version>4.20.0</liquidbase-core.version>
-		<liquidbase-mongodb.version>4.21.0</liquidbase-mongodb.version>
+		<mongock.version>5.3.1</mongock.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
 		<springdoc-openapi-starter-webmvc-ui.version>2.1.0</springdoc-openapi-starter-webmvc-ui.version>
 		<lombok.version>1.18.28</lombok.version>
@@ -45,6 +44,18 @@
 		<maven-surefire-plugin.version>3.1.0</maven-surefire-plugin.version>
 		<jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.mongock</groupId>
+				<artifactId>mongock-bom</artifactId>
+				<version>${mongock.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<!-- Spring Boot -->
@@ -71,14 +82,12 @@
 
 		<!-- Database migration -->
 		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-core</artifactId>
-			<version>${liquidbase-core.version}</version>
+			<groupId>io.mongock</groupId>
+			<artifactId>mongock-springboot-v3</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.liquibase.ext</groupId>
-			<artifactId>liquibase-mongodb</artifactId>
-			<version>${liquidbase-mongodb.version}</version>
+			<groupId>io.mongock</groupId>
+			<artifactId>mongodb-springdata-v4-driver</artifactId>
 		</dependency>
 
 		<!-- Mapper -->

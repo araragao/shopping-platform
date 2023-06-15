@@ -21,7 +21,7 @@ public class DiscountPolicyController implements DiscountPolicyApi {
 
   @Override
   public DiscountPolicyDto getDiscountPolicyById(String id) {
-    log.info("getDiscountPolicy with discountPolicyId: {}", id);
+    log.info("getDiscountPolicy with ID: {}", id);
     return discountPolicyMapper.toDto(discountPolicyService.getDiscountPolicyById(id));
   }
 
@@ -61,7 +61,7 @@ public class DiscountPolicyController implements DiscountPolicyApi {
 
   @Override
   public void deleteDiscountPolicyById(String id) {
-    log.info("deleteDiscountPolicy with id: {}", id);
+    log.info("deleteDiscountPolicy with ID: {}", id);
     discountPolicyService.deleteDiscountPolicy(id);
   }
 

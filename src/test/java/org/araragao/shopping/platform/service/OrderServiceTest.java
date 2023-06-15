@@ -19,10 +19,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class OrderServiceTest {
 
-  @Mock
-  DiscountPolicyService discountPolicyService;
-  @InjectMocks
-  OrderService orderService;
+  @Mock DiscountPolicyService discountPolicyService;
+  @InjectMocks OrderService orderService;
 
   @Test
   void testGetOrderPrice() {

@@ -1,5 +1,17 @@
+shopping-platform:
+  server:
+    port: ${SERVER_PORT}
+  mongodb:
+    uri: ${MONGODB_URI}
+    init: ${MONGODB_INIT}
+  docker:
+    compose:
+      file: ${DOCKER_COMPOSE_FILE}
+
+---
+
 server:
-  port: 8080
+  port: ${shopping-platform.server.port}
 
 management:
   endpoints:
@@ -8,11 +20,22 @@ management:
         include: '*'
 
 spring:
-  profiles:
-    active: local
   jackson:
     deserialization:
       fail-on-unknown-properties: true
+  data:
+    mongodb:
+      uri: ${shopping-platform.mongodb.uri}
+  docker:
+    compose:
+      file: ${shopping-platform.docker.compose.file}
+      skip:
+        in-tests: false
+
+mongock:
+  enabled: ${shopping-platform.mongodb.init}
+  migration-scan-package:
+    - org.araragao.shopping.platform.dao.database.init
 
 springdoc:
   api-docs:

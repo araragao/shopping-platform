@@ -1,7 +1,9 @@
-spring:
-  data:
-    mongodb:
-      uri: 'mongodb://root:password@localhost:27017/shopping-platform?authSource=admin&readPreference=primary&ssl=false&directConnection=true'
+shopping-platform:
+  server:
+    port: 8080
+  mongodb:
+    uri: 'mongodb://localhost:27017/shopping-platform'
+    init: true
   docker:
     compose:
-      file: './docker-compose/docker-compose-local.yml'
+      file: './docker-compose/local.yml'

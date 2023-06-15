@@ -18,7 +18,9 @@ class OrderValidationServiceTest {
   @Test
   void testValidateRelationship() {
     Product product = DataUtils.getProduct(BigDecimal.ONE, BigInteger.ONE);
-    DiscountPolicy discountPolicy = DataUtils.getActiveCountDiscountPolicyWithProductId(product.getId(), BigDecimal.ONE, BigInteger.TEN);
+    DiscountPolicy discountPolicy =
+        DataUtils.getActiveCountDiscountPolicyWithProductId(
+            product.getId(), BigDecimal.ONE, BigInteger.TEN);
 
     assertDoesNotThrow(() -> orderValidationService.validateRelationship(product, discountPolicy));
   }
@@ -29,7 +31,9 @@ class OrderValidationServiceTest {
     DiscountPolicy discountPolicy =
         DataUtils.getActiveCountDiscountPolicy(BigDecimal.ONE, BigInteger.TEN);
 
-    assertThrows(OrderValidationException.class, () -> orderValidationService.validateRelationship(product, discountPolicy));
+    assertThrows(
+        OrderValidationException.class,
+        () -> orderValidationService.validateRelationship(product, discountPolicy));
   }
 
   @Test
@@ -46,7 +50,8 @@ class OrderValidationServiceTest {
     Product product = DataUtils.getProduct(BigDecimal.ONE, BigInteger.ZERO);
 
     assertThrows(
-        OrderValidationException.class, () -> orderValidationService.validateAvailability(amount, product));
+        OrderValidationException.class,
+        () -> orderValidationService.validateAvailability(amount, product));
   }
 
   @Test
@@ -55,6 +60,7 @@ class OrderValidationServiceTest {
     Product product = DataUtils.getProduct(BigDecimal.ONE, BigInteger.ONE);
 
     assertThrows(
-        OrderValidationException.class, () -> orderValidationService.validateAvailability(amount, product));
+        OrderValidationException.class,
+        () -> orderValidationService.validateAvailability(amount, product));
   }
 }

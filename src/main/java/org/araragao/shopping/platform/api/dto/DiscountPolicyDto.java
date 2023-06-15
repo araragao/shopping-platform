@@ -10,21 +10,13 @@ import org.araragao.shopping.platform.model.DiscountType;
 
 public record DiscountPolicyDto(
     String id,
-
     @NotNull(message = "Product ID must not be null")
-    @NotEmpty(message = "Product ID must not be empty")
-    String productId,
-
-    @NotNull(message = "Discount type must not be null")
-    DiscountType type,
-
-    @NotNull(message = "Active must not be null")
-    Boolean active,
-
+        @NotEmpty(message = "Product ID must not be empty")
+        String productId,
+    @NotNull(message = "Discount type must not be null") DiscountType type,
+    @NotNull(message = "Active must not be null") Boolean active,
     @NotNull(message = "Threshold must not be null")
-    @PositiveOrZero(message = "Threshold must be positive or zero")
-    BigInteger threshold,
-
-    @NotNull(message = "Value must not be null")
-    @Positive(message = "Value must be positive")
-    BigDecimal value) {}
+        @PositiveOrZero(message = "Threshold must be positive or zero")
+        BigInteger threshold,
+    @NotNull(message = "Value must not be null") @Positive(message = "Value must be positive")
+        BigDecimal value) {}

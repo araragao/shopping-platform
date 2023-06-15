@@ -1,5 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Application" type="Application" factoryName="Application">
+    <envs>
+      <env name="spring.profiles.active" value="local" />
+    </envs>
     <option name="MAIN_CLASS_NAME" value="org.araragao.shopping.platform.Application" />
     <module name="shopping-platform" />
     <extension name="coverage">

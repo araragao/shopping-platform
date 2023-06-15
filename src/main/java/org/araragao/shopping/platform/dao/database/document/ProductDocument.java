@@ -15,8 +15,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 @NoArgsConstructor
 @Document(collection = "products")
 public class ProductDocument extends AuditableDocument {
-  @MongoId
-  private String id;
+  @MongoId private String id;
   private String name;
   private BigDecimal price;
   private BigInteger stock;

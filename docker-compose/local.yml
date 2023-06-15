@@ -3,7 +3,7 @@ version: '3.9'
 services:
   mongodb-local:
     extends:
-      file: ./docker-compose-common.yml
+      file: common.yml
       service: mongodb
     ports:
       - 27017:27017

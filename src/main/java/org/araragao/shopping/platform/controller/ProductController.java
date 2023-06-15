@@ -20,7 +20,7 @@ public class ProductController implements ProductApi {
 
   @Override
   public ProductDto getProductById(String id) {
-    log.info("getProduct with productId: {}", id);
+    log.info("getProduct with ID: {}", id);
     return productMapper.toDto(productService.getProductById(id));
   }
 

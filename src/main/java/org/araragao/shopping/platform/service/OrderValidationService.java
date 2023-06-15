@@ -12,19 +12,23 @@ import org.springframework.stereotype.Service;
 public class OrderValidationService {
 
   /**
-
-   Validates the relationship between a product and a discount policy.
-   @param product The product to validate the relationship for.
-   @param discountPolicy The discount policy to validate the relationship with.
-   @throws OrderValidationException if the discount policy is not applicable to the product.
+   * Validates the relationship between a product and a discount policy.
+   *
+   * @param product The product to validate the relationship for.
+   * @param discountPolicy The discount policy to validate the relationship with.
+   * @throws OrderValidationException if the discount policy is not applicable to the product.
    */
   public void validateRelationship(Product product, DiscountPolicy discountPolicy) {
     if (!isProductAndPolicyRelated(product.getId(), discountPolicy.getProductId())) {
-      log.warn("Order Validation :: DiscountPolicy ID: {} is not applicable to Product ID: {}",
-          discountPolicy.getId(), product.getId());
+      log.warn(
+          "Order Validation :: DiscountPolicy ID: {} is not applicable to Product ID: {}",
+          discountPolicy.getId(),
+          product.getId());
       throw new OrderValidationException(
-          "Discount policy with id: " + discountPolicy.getId()
-              + " cannot be applied to Product with id: " + product.getId());
+          "Discount policy with id: "
+              + discountPolicy.getId()
+              + " cannot be applied to Product with id: "
+              + product.getId());
     }
   }
 

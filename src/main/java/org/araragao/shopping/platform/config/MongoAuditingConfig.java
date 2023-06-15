@@ -19,6 +19,7 @@ public class MongoAuditingConfig {
     @Override
     public Optional<String> getCurrentAuditor() {
       return Optional.of("default");
+      // https://github.com/araragao/shopping-platform/issues/20
       // return Optional.ofNullable(SecurityContextHolder.getContext())
       //    .map(SecurityContext::getAuthentication)
       //    .filter(Authentication::isAuthenticated)
