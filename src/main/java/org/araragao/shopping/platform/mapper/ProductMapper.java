@@ -17,7 +17,13 @@ public interface ProductMapper {
 
   List<ProductDto> toDtos(List<Product> product);
 
-  Page<ProductDto> toDtoPage(Page<Product> productPage);
+  default Page<ProductDto> toDtoPage(Page<Product> productPage) {
+    Page<ProductDto> productDtoPage = new Page<>();
+    productDtoPage.setContent(toDtos(productPage.getContent()));
+    productDtoPage.setPageInfo(productPage.getPageInfo());
+    productDtoPage.setSortInfo(productPage.getSortInfo());
+    return productDtoPage;
+  }
 
   Product toModel(ProductDto productDto);
 

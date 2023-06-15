@@ -2,11 +2,13 @@ package org.araragao.shopping.platform.mapper;
 
 import java.util.List;
 import org.araragao.shopping.platform.api.dto.DiscountPolicyDto;
+import org.araragao.shopping.platform.api.dto.ProductDto;
 import org.araragao.shopping.platform.config.MapStructConfig;
 import org.araragao.shopping.platform.dao.database.document.DiscountPolicyDocument;
 import org.araragao.shopping.platform.mapper.annotation.MappingIgnoreAuditableFields;
 import org.araragao.shopping.platform.model.DiscountPolicy;
 import org.araragao.shopping.platform.model.Page;
+import org.araragao.shopping.platform.model.Product;
 import org.mapstruct.Mapper;
 import org.springframework.data.domain.PageImpl;
 
@@ -17,7 +19,13 @@ public interface DiscountPolicyMapper {
 
   List<DiscountPolicyDto> toDtos(List<DiscountPolicy> discountPolicy);
 
-  Page<DiscountPolicyDto> toDtoPage(Page<DiscountPolicy> productPage);
+  default Page<DiscountPolicyDto> toDtoPage(Page<DiscountPolicy> discountPolicyPage) {
+    Page<DiscountPolicyDto> discountPolicyDtoPage = new Page<>();
+    discountPolicyDtoPage.setContent(toDtos(discountPolicyPage.getContent()));
+    discountPolicyDtoPage.setPageInfo(discountPolicyPage.getPageInfo());
+    discountPolicyDtoPage.setSortInfo(discountPolicyPage.getSortInfo());
+    return discountPolicyDtoPage;
+  }
 
   DiscountPolicy toModel(DiscountPolicyDto discountPolicyDto);
 
