@@ -17,7 +17,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 @NoArgsConstructor
 @Document(collection = "discount_policies")
 public class DiscountPolicyDocument extends AuditableDocument {
-  @MongoId String id;
+  @MongoId private String id;
   @Indexed private String productId;
   private DiscountType type;
   @Indexed private Boolean active;

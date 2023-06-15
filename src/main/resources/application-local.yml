@@ -1,0 +1,9 @@
+shopping-platform:
+  server:
+    port: 8080
+  mongodb:
+    uri: 'mongodb://localhost:27017/shopping-platform'
+    init: true
+  docker:
+    compose:
+      file: './docker-compose/local.yml'

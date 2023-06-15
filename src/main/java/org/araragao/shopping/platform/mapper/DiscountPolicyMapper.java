@@ -17,7 +17,13 @@ public interface DiscountPolicyMapper {
 
   List<DiscountPolicyDto> toDtos(List<DiscountPolicy> discountPolicy);
 
-  Page<DiscountPolicyDto> toDtoPage(Page<DiscountPolicy> productPage);
+  default Page<DiscountPolicyDto> toDtoPage(Page<DiscountPolicy> discountPolicyPage) {
+    Page<DiscountPolicyDto> discountPolicyDtoPage = new Page<>();
+    discountPolicyDtoPage.setContent(toDtos(discountPolicyPage.getContent()));
+    discountPolicyDtoPage.setPageInfo(discountPolicyPage.getPageInfo());
+    discountPolicyDtoPage.setSortInfo(discountPolicyPage.getSortInfo());
+    return discountPolicyDtoPage;
+  }
 
   DiscountPolicy toModel(DiscountPolicyDto discountPolicyDto);
 

@@ -20,7 +20,7 @@ public class ProductController implements ProductApi {
 
   @Override
   public ProductDto getProductById(String id) {
-    log.info("getProduct with productId: {}", id);
+    log.info("getProductById with ID: {}", id);
     return productMapper.toDto(productService.getProductById(id));
   }
 
@@ -44,7 +44,7 @@ public class ProductController implements ProductApi {
 
   @Override
   public void deleteProductById(String id) {
-    log.info("deleteProduct with productId: {}", id);
+    log.info("deleteProductById with productId: {}", id);
     productService.deleteProductById(id);
   }
 }

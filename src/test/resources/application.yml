@@ -1,4 +1,45 @@
-spring:
+shopping-platform:
+  server:
+    port: 8080
   mongodb:
-    embedded:
-      version: 4.7.0
+    uri: 'mongodb://localhost:27018/shopping-platform'
+    init: true
+  docker:
+    compose:
+      file: './docker-compose/test.yml'
+
+---
+
+server:
+  port: ${shopping-platform.server.port}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+spring:
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  data:
+    mongodb:
+      uri: ${shopping-platform.mongodb.uri}
+  docker:
+    compose:
+      file: ${shopping-platform.docker.compose.file}
+      skip:
+        in-tests: false
+
+mongock:
+  enabled: ${shopping-platform.mongodb.init}
+  migration-scan-package:
+    - org.araragao.shopping.platform.dao.database.init
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method

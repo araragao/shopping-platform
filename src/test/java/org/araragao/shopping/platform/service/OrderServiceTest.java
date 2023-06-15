@@ -30,9 +30,9 @@ class OrderServiceTest {
   @Test
   public void testGetDiscountedOrderPriceWithNoDiscount() {
     BigInteger amount = BigInteger.TEN;
-    Product product = DataUtils.getMockProduct(BigDecimal.TEN, BigInteger.valueOf(1000));
+    Product product = DataUtils.getProduct(BigDecimal.TEN, BigInteger.valueOf(1000));
     DiscountPolicy discountPolicy =
-        DataUtils.getMockCountDiscountPolicy(BigDecimal.valueOf(5), BigInteger.valueOf(15));
+        DataUtils.getActiveCountDiscountPolicy(BigDecimal.valueOf(5), BigInteger.valueOf(15));
 
     BigDecimal discountedOrderPrice =
         orderService.getDiscountedOrderPrice(amount, product, discountPolicy);
@@ -43,9 +43,9 @@ class OrderServiceTest {
   @Test
   public void testGetDiscountedOrderPriceWithCountDiscount() {
     BigInteger amount = BigInteger.TEN;
-    Product product = DataUtils.getMockProduct(BigDecimal.TEN, BigInteger.valueOf(1000));
+    Product product = DataUtils.getProduct(BigDecimal.TEN, BigInteger.valueOf(1000));
     DiscountPolicy discountPolicy =
-        DataUtils.getMockCountDiscountPolicy(BigDecimal.ONE, BigInteger.ONE);
+        DataUtils.getActiveCountDiscountPolicy(BigDecimal.ONE, BigInteger.ONE);
 
     BigDecimal discountedOrderPrice =
         orderService.getDiscountedOrderPrice(amount, product, discountPolicy);
@@ -56,9 +56,9 @@ class OrderServiceTest {
   @Test
   public void testGetDiscountedOrderPriceWithPercentageDiscount() {
     BigInteger amount = BigInteger.TEN;
-    Product product = DataUtils.getMockProduct(BigDecimal.TEN, BigInteger.valueOf(1000));
+    Product product = DataUtils.getProduct(BigDecimal.TEN, BigInteger.valueOf(1000));
     DiscountPolicy discountPolicy =
-        DataUtils.getMockPercentageDiscountPolicy(BigDecimal.valueOf(0.2));
+        DataUtils.getActivePercentageDiscountPolicy(BigDecimal.valueOf(0.2));
 
     BigDecimal discountedOrderPrice =
         orderService.getDiscountedOrderPrice(amount, product, discountPolicy);
@@ -69,11 +69,11 @@ class OrderServiceTest {
   @Test
   public void testGetBestDiscountedOrderPrice() {
     BigInteger amount = BigInteger.valueOf(100);
-    Product product = DataUtils.getMockProduct(BigDecimal.valueOf(200), BigInteger.valueOf(100));
+    Product product = DataUtils.getProduct(BigDecimal.valueOf(200), BigInteger.valueOf(100));
     List<DiscountPolicy> discountPolicies =
         Arrays.asList(
-            DataUtils.getMockCountDiscountPolicy(BigDecimal.valueOf(50), BigInteger.valueOf(100)),
-            DataUtils.getMockPercentageDiscountPolicy(BigDecimal.valueOf(0.2)));
+            DataUtils.getActiveCountDiscountPolicy(BigDecimal.valueOf(50), BigInteger.valueOf(100)),
+            DataUtils.getActivePercentageDiscountPolicy(BigDecimal.valueOf(0.2)));
 
     when(discountPolicyService.getActiveDiscountPoliciesByProductId(product.getId()))
         .thenReturn(discountPolicies);
@@ -86,7 +86,7 @@ class OrderServiceTest {
   @Test
   public void testGetBestDiscountedOrderPriceWithNoDiscountPolicies() {
     BigInteger amount = BigInteger.valueOf(100);
-    Product product = DataUtils.getMockProduct(BigDecimal.valueOf(200), BigInteger.valueOf(100));
+    Product product = DataUtils.getProduct(BigDecimal.valueOf(200), BigInteger.valueOf(100));
     List<DiscountPolicy> discountPolicies = List.of();
 
     when(discountPolicyService.getActiveDiscountPoliciesByProductId(product.getId()))
