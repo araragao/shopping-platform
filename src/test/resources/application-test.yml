@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      uri: 'mongodb://root:password@localhost:27018/shopping-platform?authSource=admin&readPreference=primary&ssl=false&directConnection=true'
+  docker:
+    compose:
+      file: './docker-compose/docker-compose-test.yml'
+      skip:
+        in-tests: false

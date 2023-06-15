@@ -1,4 +1,3 @@
 spring:
-  mongodb:
-    embedded:
-      version: 4.7.0
+  profiles:
+    active: test

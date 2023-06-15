@@ -13,7 +13,7 @@ Additionally, it also supports CRUD operations for `Product` and `DiscountPolicy
 
 ## Requirements
 - Java 17+
-- Docker Engine 19.03.0+
+- Docker Engine 20.10.0+
 
 ## Technologies
 - 🫀 **Language**: [Java](https://docs.oracle.com/en/java/javase/17/)
@@ -41,11 +41,9 @@ Additionally, it also supports CRUD operations for `Product` and `DiscountPolicy
 
 ## Run application
 
-1. Build the application
+1. Build the containerized application
 `docker build -t shopping-platform-app .`
-2. Run the dependencies (i.e. mongodb)
-`docker compose up`
-3. Run the application
+2. Run the containerized application
 `docker run -p 8080:8080 shopping-platform-app`
 
 - OpenAPI: [http://localhost:8080/api-docs](http://localhost:8080/api-docs)
@@ -54,6 +52,11 @@ Additionally, it also supports CRUD operations for `Product` and `DiscountPolicy
 ## FAQ
 
 ### Why is Maven not a required technology?
-The project is bundled with a Maven Wrapper.
+The project is bundled with a `Maven Wrapper`.
 Maven Wrapper eliminates the need for developers to install Maven separately since it provides a 
 lightweight script that handles all Maven interactions, ensuring consistent and hassle-free project setup.
+
+### Why is MongoDB not a required technology?
+MongoDB is provided as a Docker image, defined in the docker-compose-common.yml file and started 
+alongside the application by leveraging `spring-boot-docker-compose`, available from 
+`Spring Boot 3.1` version.

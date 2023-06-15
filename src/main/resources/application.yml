@@ -8,12 +8,11 @@ management:
         include: '*'
 
 spring:
+  profiles:
+    active: local
   jackson:
     deserialization:
       fail-on-unknown-properties: true
-  data:
-    mongodb:
-      uri: 'mongodb://root:password@localhost:27017/shopping-platform?authSource=admin&readPreference=primary&ssl=false&directConnection=true'
 
 springdoc:
   api-docs:
