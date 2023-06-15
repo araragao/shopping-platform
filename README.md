@@ -41,20 +41,15 @@ Additionally, it also supports CRUD operations for `Product` and `DiscountPolicy
 
 ## Run application
 
+1. Build the application
+`docker build -t shopping-platform-app .`
+2. Run the dependencies (i.e. mongodb)
+`docker compose up`
+3. Run the application
+`docker run -p 8080:8080 shopping-platform-app`
+
 - OpenAPI: [http://localhost:8080/api-docs](http://localhost:8080/api-docs)
 - SwaggerUI: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
-
-### Run application and external dependencies
-Docker Compose is used to achieve this purpose.
-The application is containerized according to the respective Dockerfile and started alongside a MongoDB instance.
-
-`docker compose up`
-
-### Build
-`docker build -t shopping-platform-app .`
-
-### Run
-`docker run -p 8080:8080 shopping-platform-app`
 
 ## FAQ
 
