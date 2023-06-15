@@ -2,13 +2,11 @@ package org.araragao.shopping.platform.mapper;
 
 import java.util.List;
 import org.araragao.shopping.platform.api.dto.DiscountPolicyDto;
-import org.araragao.shopping.platform.api.dto.ProductDto;
 import org.araragao.shopping.platform.config.MapStructConfig;
 import org.araragao.shopping.platform.dao.database.document.DiscountPolicyDocument;
 import org.araragao.shopping.platform.mapper.annotation.MappingIgnoreAuditableFields;
 import org.araragao.shopping.platform.model.DiscountPolicy;
 import org.araragao.shopping.platform.model.Page;
-import org.araragao.shopping.platform.model.Product;
 import org.mapstruct.Mapper;
 import org.springframework.data.domain.PageImpl;
 

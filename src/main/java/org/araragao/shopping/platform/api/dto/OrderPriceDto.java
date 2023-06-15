@@ -5,5 +5,6 @@ import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 public record OrderPriceDto(
-    @NotNull(message = "Price must not be null") @Positive(message = "Price must be positive")
-        BigDecimal price) {}
+    @NotNull(message = "Price must not be null")
+    @Positive(message = "Price must be positive")
+    BigDecimal price) {}

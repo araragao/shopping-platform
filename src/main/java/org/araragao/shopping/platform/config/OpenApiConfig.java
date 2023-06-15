@@ -16,8 +16,9 @@ public class OpenApiConfig {
         .info(
             new Info()
                 .title("Shopping platform")
-                .description("Shopping platform aims to provide a REST API that allows users to get "
-                    + "price quotations based on order's amount, related product and discount policy.")
+                .description(
+                    "Shopping platform aims to provide a REST API that allows users to get "
+                  + "price quotations based on order's amount, related product and discount policy.")
                 .version("1.0.0")
                 .contact(
                     new Contact()
