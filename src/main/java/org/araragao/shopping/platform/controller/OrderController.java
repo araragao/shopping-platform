@@ -30,7 +30,8 @@ public class OrderController implements OrderApi {
     log.info("getOrderPrice with orderDto: {}", orderDto);
 
     Product product = productService.getProductById(orderDto.productId());
-    orderValidationService.validate(orderDto.amount(), product);
+
+    orderValidationService.validateAvailability(orderDto.amount(), product);
 
     return new OrderPriceDto(orderService.getOrderPrice(orderDto.amount(), product.getPrice()));
   }
@@ -40,10 +41,11 @@ public class OrderController implements OrderApi {
     log.info("getDiscountedOrderPrice with orderDiscountedDto: {}", orderPriceDiscountedDto);
 
     Product product = productService.getProductById(orderPriceDiscountedDto.productId());
-    orderValidationService.validate(orderPriceDiscountedDto.amount(), product);
-
     DiscountPolicy discountPolicy =
         discountPolicyService.getDiscountPolicyById(orderPriceDiscountedDto.discountPolicyId());
+
+    orderValidationService.validateRelationship(product, discountPolicy);
+    orderValidationService.validateAvailability(orderPriceDiscountedDto.amount(), product);
 
     return new OrderPriceDto(
         orderService.getDiscountedOrderPrice(
@@ -57,7 +59,8 @@ public class OrderController implements OrderApi {
         "getBestDiscountedOrderPrice with orderDiscountedBestDto: {}", orderPriceDiscountedBestDto);
 
     Product product = productService.getProductById(orderPriceDiscountedBestDto.productId());
-    orderValidationService.validate(orderPriceDiscountedBestDto.amount(), product);
+
+    orderValidationService.validateAvailability(orderPriceDiscountedBestDto.amount(), product);
 
     return new OrderPriceDto(
         orderService.getBestDiscountedOrderPrice(orderPriceDiscountedBestDto.amount(), product));

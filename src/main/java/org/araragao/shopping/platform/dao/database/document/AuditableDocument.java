@@ -15,8 +15,12 @@ import org.springframework.data.annotation.LastModifiedDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuditableDocument {
-  @CreatedBy String createdBy;
-  @CreatedDate LocalDateTime createdAt;
-  @LastModifiedBy String lastModifiedBy;
-  @LastModifiedDate LocalDateTime lastModifiedAt;
+  @CreatedBy
+  String createdBy;
+  @CreatedDate
+  LocalDateTime createdAt;
+  @LastModifiedBy
+  String lastModifiedBy;
+  @LastModifiedDate
+  LocalDateTime lastModifiedAt;
 }
