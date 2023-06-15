@@ -76,7 +76,7 @@ public interface DiscountPolicyApi {
       })
   Page<DiscountPolicyDto> getDiscountPolicies(@ParameterObject Pageable pageable);
 
-  @GetMapping("/{productId}")
+  @GetMapping("/product/{productId}")
   @Operation(
       summary = "Get a DiscountPolicy by Product ID",
       description = "Get a `DiscountPolicy` by `Product` ID.")
@@ -101,7 +101,7 @@ public interface DiscountPolicyApi {
       })
   List<DiscountPolicyDto> getDiscountPoliciesByProductId(@PathVariable String productId);
 
-  @GetMapping("/{productId}/active")
+  @GetMapping("/product/{productId}/active")
   @Operation(
       summary = "Get a List of active DiscountPolicy by Product ID",
       description = "Get a List of active `DiscountPolicy` by `Product` ID.")
@@ -184,7 +184,7 @@ public interface DiscountPolicyApi {
       value = {@ApiResponse(responseCode = "200", description = "Deleted DiscountPolicy")})
   void deleteDiscountPolicyById(@PathVariable String id);
 
-  @DeleteMapping("/{productId}")
+  @DeleteMapping("/product/{productId}")
   @Operation(
       summary = "Delete all DiscountPolicy by Product ID",
       description = "Delete all `DiscountPolicy` by `Product` ID.")
