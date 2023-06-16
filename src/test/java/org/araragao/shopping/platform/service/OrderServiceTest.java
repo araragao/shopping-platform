@@ -30,6 +30,16 @@ class OrderServiceTest {
   }
 
   @Test
+  void testGetOrderPriceWithNegativeAmount() {
+      assertEquals(BigDecimal.ZERO, orderService.getOrderPrice(BigInteger.valueOf(-1), BigDecimal.ONE));
+  }
+
+  @Test
+  void testGetOrderPriceWithNegativePrice() {
+    assertEquals(BigDecimal.ZERO, orderService.getOrderPrice(BigInteger.TEN, BigDecimal.valueOf(-1)));
+  }
+
+  @Test
   void testGetDiscountedOrderPriceWithNoDiscount() {
     BigInteger amount = BigInteger.TEN;
     Product product = DataUtils.getProduct(BigDecimal.TEN, BigInteger.valueOf(1000));
@@ -53,6 +63,19 @@ class OrderServiceTest {
         orderService.getDiscountedOrderPrice(amount, product, discountPolicy);
 
     assertEquals(BigDecimal.valueOf(90), discountedOrderPrice);
+  }
+
+  @Test
+  void testGetDiscountedOrderPriceWithCountDiscountValueHigherThanOrderAmount() {
+    BigInteger amount = BigInteger.TEN;
+    Product product = DataUtils.getProduct(BigDecimal.TEN, BigInteger.valueOf(1000));
+    DiscountPolicy discountPolicy =
+        DataUtils.getActiveCountDiscountPolicy(BigDecimal.valueOf(11), BigInteger.ONE);
+
+    BigDecimal discountedOrderPrice =
+        orderService.getDiscountedOrderPrice(amount, product, discountPolicy);
+
+    assertEquals(BigDecimal.valueOf(0), discountedOrderPrice);
   }
 
   @Test
