@@ -71,7 +71,8 @@ public class OrderService {
   }
 
   private BigDecimal calculatePrice(BigInteger amount, BigDecimal price) {
-    return new BigDecimal(amount).multiply(price);
+    BigDecimal result = new BigDecimal(amount).multiply(price);
+    return result.compareTo(BigDecimal.ZERO) < 0 ? BigDecimal.ZERO : result;
   }
 
   private BigDecimal calculateCountDiscountedOrderPrice(

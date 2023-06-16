@@ -14,6 +14,10 @@ import org.araragao.shopping.platform.api.dto.page.PageDiscountPolicyDto;
 import org.araragao.shopping.platform.model.Page;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -74,7 +78,9 @@ public interface DiscountPolicyApi {
             description = "Internal server error",
             content = @Content(mediaType = "application/json"))
       })
-  Page<DiscountPolicyDto> getDiscountPolicies(@ParameterObject Pageable pageable);
+  Page<DiscountPolicyDto> getDiscountPolicies(
+      @PageableDefault @SortDefault(sort = "productId", direction = Direction.DESC) @ParameterObject
+      Pageable pageable);
 
   @GetMapping("/product/{productId}")
   @Operation(

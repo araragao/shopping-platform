@@ -19,8 +19,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class OrderServiceTest {
 
-  @Mock DiscountPolicyService discountPolicyService;
-  @InjectMocks OrderService orderService;
+  @Mock
+  DiscountPolicyService discountPolicyService;
+  @InjectMocks
+  OrderService orderService;
 
   @Test
   void testGetOrderPrice() {
@@ -28,7 +30,17 @@ class OrderServiceTest {
   }
 
   @Test
-  public void testGetDiscountedOrderPriceWithNoDiscount() {
+  void testGetOrderPriceWithNegativeAmount() {
+      assertEquals(BigDecimal.ZERO, orderService.getOrderPrice(BigInteger.valueOf(-1), BigDecimal.ONE));
+  }
+
+  @Test
+  void testGetOrderPriceWithNegativePrice() {
+    assertEquals(BigDecimal.ZERO, orderService.getOrderPrice(BigInteger.TEN, BigDecimal.valueOf(-1)));
+  }
+
+  @Test
+  void testGetDiscountedOrderPriceWithNoDiscount() {
     BigInteger amount = BigInteger.TEN;
     Product product = DataUtils.getProduct(BigDecimal.TEN, BigInteger.valueOf(1000));
     DiscountPolicy discountPolicy =
@@ -41,7 +53,7 @@ class OrderServiceTest {
   }
 
   @Test
-  public void testGetDiscountedOrderPriceWithCountDiscount() {
+  void testGetDiscountedOrderPriceWithCountDiscount() {
     BigInteger amount = BigInteger.TEN;
     Product product = DataUtils.getProduct(BigDecimal.TEN, BigInteger.valueOf(1000));
     DiscountPolicy discountPolicy =
@@ -54,7 +66,20 @@ class OrderServiceTest {
   }
 
   @Test
-  public void testGetDiscountedOrderPriceWithPercentageDiscount() {
+  void testGetDiscountedOrderPriceWithCountDiscountValueHigherThanOrderAmount() {
+    BigInteger amount = BigInteger.TEN;
+    Product product = DataUtils.getProduct(BigDecimal.TEN, BigInteger.valueOf(1000));
+    DiscountPolicy discountPolicy =
+        DataUtils.getActiveCountDiscountPolicy(BigDecimal.valueOf(11), BigInteger.ONE);
+
+    BigDecimal discountedOrderPrice =
+        orderService.getDiscountedOrderPrice(amount, product, discountPolicy);
+
+    assertEquals(BigDecimal.valueOf(0), discountedOrderPrice);
+  }
+
+  @Test
+  void testGetDiscountedOrderPriceWithPercentageDiscount() {
     BigInteger amount = BigInteger.TEN;
     Product product = DataUtils.getProduct(BigDecimal.TEN, BigInteger.valueOf(1000));
     DiscountPolicy discountPolicy =
@@ -67,7 +92,7 @@ class OrderServiceTest {
   }
 
   @Test
-  public void testGetBestDiscountedOrderPrice() {
+  void testGetBestDiscountedOrderPrice() {
     BigInteger amount = BigInteger.valueOf(100);
     Product product = DataUtils.getProduct(BigDecimal.valueOf(200), BigInteger.valueOf(100));
     List<DiscountPolicy> discountPolicies =
@@ -84,7 +109,7 @@ class OrderServiceTest {
   }
 
   @Test
-  public void testGetBestDiscountedOrderPriceWithNoDiscountPolicies() {
+  void testGetBestDiscountedOrderPriceWithNoDiscountPolicies() {
     BigInteger amount = BigInteger.valueOf(100);
     Product product = DataUtils.getProduct(BigDecimal.valueOf(200), BigInteger.valueOf(100));
     List<DiscountPolicy> discountPolicies = List.of();

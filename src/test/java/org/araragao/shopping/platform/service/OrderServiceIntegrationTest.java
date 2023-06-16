@@ -10,15 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class OrderServiceIntegrationTest {
+class OrderServiceIntegrationTest {
 
   @Autowired
-  private OrderService orderService;
+  OrderService orderService;
   @Autowired
-  private ProductService productService;
+  ProductService productService;
 
   @Test
-  public void testGetBestDiscountedOrderPrice() {
+  void testGetBestDiscountedOrderPrice() {
     Product savedProduct = productService.getProductById("648b4168ca84014e814b3f7b");
 
     BigDecimal bestDiscountedOrderPrice =
