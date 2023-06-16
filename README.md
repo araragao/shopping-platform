@@ -2,7 +2,7 @@
 
 ## Description
 **This application aims to provide a REST API that allows users to get price quotations based on 
-order's amount, related product and discount policy..**
+order's amount, related product and discount policy.**
 
 It supports the calculation of the order's price based on 3 different methods:
 - (standard) order price
