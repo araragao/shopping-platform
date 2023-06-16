@@ -9,7 +9,11 @@ It supports the calculation of the order's price based on 3 different methods:
 - discounted order price
 - best discounted order price
 
-Additionally, it also supports CRUD operations for `Product` and `DiscountPolicy` entities.
+Additionally, it supports CRUD operations for `Product` and `DiscountPolicy` entities.
+
+`DiscountPolicy` can be of type `COUNT` or `PERCENTAGE`.
+`DiscountPolicy` threshold field should be used when there is a need to support different discount
+tiers based on the order's amount.
 
 ## Requirements
 - Java 17+
@@ -57,17 +61,17 @@ lightweight script that handles all Maven operations, ensuring consistents proje
 MongoDB is not a required technology since it is added as a dependency in the `docker-compose.yml`.
 
 Additionally, whenever the application is run via .jar file or IDE, MongoDB is also provided as a 
-Docker image, defined in the `/docker-compose/mongodb/common.yml` file and started alongside the 
-application by leveraging `spring-boot-docker-compose`, available from `Spring Boot 3.1` version.
+Docker image, defined in the `/docker-compose/common.yml` file and started alongside the application
+by leveraging `spring-boot-docker-compose`, available from `Spring Boot 3.1` version.
 
 ### Why is dockerized mongodb split in two different files, local and test? 
 Unfortunately, running containers in a local environment in isolation from containers running in 
 tests is not so easy to configure. 
-That happens because `spring-boot-docker-compose` tries to find out if it should start new 
+That happens because `spring-boot-docker-compose` library tries to find out if it should start new 
 containers with only a simple check of results from `docker compose ps` command. 
 If there are any services already running, it won’t spin up new containers for us, which will result
 in tests connected to the container started for local development.
 The solution was to create separate docker-compose.yml files for each environment (local and test) 
 and to put them in `docker-compose` folder.
 
-From [SoftwareMill Tech Blog](https://softwaremill.com/do-you-still-need-testcontainers-with-spring-boot-3-1/)
+From [SoftwareMill blog: Do you still need testcontainers with Spring Boot 3.1?](https://softwaremill.com/do-you-still-need-testcontainers-with-spring-boot-3-1/)

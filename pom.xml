@@ -131,6 +131,10 @@
 				<groupId>com.spotify.fmt</groupId>
 				<artifactId>fmt-maven-plugin</artifactId>
 				<version>${fmt-maven-plugin.version}</version>
+				<configuration>
+					<failOnError>false</failOnError>
+					<style>google</style>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
