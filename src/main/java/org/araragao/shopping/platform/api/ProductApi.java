@@ -12,6 +12,7 @@ import org.araragao.shopping.platform.api.dto.page.PageProductDto;
 import org.araragao.shopping.platform.model.Page;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
 import org.springframework.validation.annotation.Validated;
@@ -74,7 +75,9 @@ public interface ProductApi {
             description = "Internal server error",
             content = @Content(mediaType = "application/json"))
       })
-  Page<ProductDto> getProducts(@PageableDefault @SortDefault @ParameterObject Pageable pageable);
+  Page<ProductDto> getProducts(
+      @PageableDefault @SortDefault(sort = "name", direction = Direction.DESC) @ParameterObject
+      Pageable pageable);
 
   @PostMapping
   @Operation(summary = "Create a Product", description = "Create a `Product`.")
