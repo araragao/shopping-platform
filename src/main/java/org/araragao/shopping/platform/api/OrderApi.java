@@ -52,8 +52,8 @@ public interface OrderApi {
 
   @PostMapping("/price/discounted")
   @Operation(
-      summary = "Get the discounted order price based on a specific PolicyDiscount",
-      description = "Get the discounted order price based on a specific `PolicyDiscount`.")
+      summary = "Get the discounted order price based on a specific DiscountPolicy",
+      description = "Get the discounted order price based on a specific `DiscountPolicy`.")
   @ApiResponses(
       value = {
         @ApiResponse(
@@ -82,8 +82,8 @@ public interface OrderApi {
 
   @PostMapping("/price/discounted/best")
   @Operation(
-      summary = "Get the best order price based on active related PolicyDiscount",
-      description = "Get the best order price based on active related `PolicyDiscount`.")
+      summary = "Get the best order price based on active related DiscountPolicy",
+      description = "Get the best order price based on active related `DiscountPolicy`.")
   @ApiResponses(
       value = {
         @ApiResponse(
